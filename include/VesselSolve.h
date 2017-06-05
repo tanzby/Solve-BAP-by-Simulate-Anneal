@@ -43,15 +43,15 @@ void violence(Vessel* veSet, string& array, int &numOfveSet,int &timeLine, int &
 }
  
 void sa(Vessel *VeSet,string & array,const int &numOfveSet,const int& timeLine,const int &BerthLine, 
-		double initTem = 100, double minTem = 0.1,double r = 0.99)//´¬Ö»¼¯ºÏ ³õÊ¼ÎÂ¶È ÏÂ½µÂÊ ×î´óµü´ú´ÎÊı
+		double initTem = 100, double minTem = 0.1,double r = 0.99)//èˆ¹åªé›†åˆ åˆå§‹æ¸©åº¦ ä¸‹é™ç‡ æœ€å¤§è¿­ä»£æ¬¡æ•°
 {
 	
-	int mincost = INF, curcost = INF, costbuf; //µ±Ç°×îĞ¡½â //µ±Ç°½â //ÁÙÊ±±äÁ¿
-	string cur(array),min,ans; //µ±Ç°½âĞòÁĞ //×îĞ¡½âĞòÁĞ //ÁÙÊ±ĞòÁĞ
-	set<string> st; //·ÀÖ¹½âÖØ¸´
+	int mincost = INF, curcost = INF, costbuf; //å½“å‰æœ€å°è§£ //å½“å‰è§£ //ä¸´æ—¶å˜é‡
+	string cur(array),min,ans; //å½“å‰è§£åºåˆ— //æœ€å°è§£åºåˆ— //ä¸´æ—¶åºåˆ—
+	set<string> st; //é˜²æ­¢è§£é‡å¤
 	while (initTem > minTem)
 	{
-		/*ÁÚ¾ÓÉú³É*/
+		/*é‚»å±…ç”Ÿæˆ*/
 		/***********************************************************************/
 		ans = cur;
 		int r1 = rand() % numOfveSet, r2;
