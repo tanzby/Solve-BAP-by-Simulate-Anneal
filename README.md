@@ -3,7 +3,7 @@
 
 # 文件包含
 
-main.cpp 为主文件
+BAP.cpp 为主文件
 Vessel.h 为管理船只库文件
 VesselSolve.h 为方法集合，目前里面有暴力与模拟退火算法
 
