@@ -17,9 +17,9 @@ struct Vessel
 	int arrivalTime;
 	int serveTime;
 	int length;
-	int t;	/*Í£´¬µÄÊ±¼äµã*/
-	int b;  /*Í£´¬µÄ²´Î»*/
-	int waitingTime;/*µÈ´ıÊ±¼ä*/
+	int t;	/*åœèˆ¹çš„æ—¶é—´ç‚¹*/
+	int b;  /*åœèˆ¹çš„æ³Šä½*/
+	int waitingTime;/*ç­‰å¾…æ—¶é—´*/
 	Vessel() 
 	{ 
 		arrivalTime = serveTime = length = 0; 
@@ -47,7 +47,7 @@ struct Vessel
 };
 
 
-/*½«´¬½øĞĞ³õÊ¼»¯´¦Àí£¬»Ö¸´½â*/
+/*å°†èˆ¹è¿›è¡Œåˆå§‹åŒ–å¤„ç†ï¼Œæ¢å¤è§£*/
 void resetAll(Vessel * vsSet,const int &setLen)
 {
 	for (int i = 0; i < setLen; i++)
@@ -56,7 +56,7 @@ void resetAll(Vessel * vsSet,const int &setLen)
 	}
 }
 
-/*µÚÒ»ÖÖ·ÅÖÃ·½·¨*/
+/*ç¬¬ä¸€ç§æ”¾ç½®æ–¹æ³•*/
 int calCost(const string & vesArray, Vessel* veSet, const int & numOfVes, const int &timeLine, const int &berthLine,bool printopt = false)
 {
 	int cost = 0;
@@ -65,7 +65,7 @@ int calCost(const string & vesArray, Vessel* veSet, const int & numOfVes, const 
 	int placeNum = 0;
 	bool availableArea[15][35];
 	memset(availableArea, 0, sizeof(availableArea));
-	resetAll(veSet, numOfVes);/*Çå³ı´¬±¾À´µÄ½â*/
+	resetAll(veSet, numOfVes);/*æ¸…é™¤èˆ¹æœ¬æ¥çš„è§£*/
 
 	for (int i = 0; i < numOfVes; i++)
 	{
@@ -75,7 +75,7 @@ int calCost(const string & vesArray, Vessel* veSet, const int & numOfVes, const 
 			//b = [0, berthLine-length]
 			for (int b = 0; berthLine >= veSet[vesArray[i]].length + b; b++) 
 			{
-				/*ÊÇ·ñ¿É·ÅÖÃÅĞ¶Ï*/
+				/*æ˜¯å¦å¯æ”¾ç½®åˆ¤æ–­*/
 				int pt = t;
 				for (; pt < t + veSet[vesArray[i]].serveTime; pt++)  //[t,t+s]
 				{
@@ -83,12 +83,12 @@ int calCost(const string & vesArray, Vessel* veSet, const int & numOfVes, const 
 					{
 						if (availableArea[pb][pt])
 						{
-							pt = INF; /*½áÊø·ÅÖÃÅĞ¶Ï£¬Ìøµ½ÏÂÒ»¸ö (t,b) */
+							pt = INF; /*ç»“æŸæ”¾ç½®åˆ¤æ–­ï¼Œè·³åˆ°ä¸‹ä¸€ä¸ª (t,b) */
 							break;
 						}
 					}
 				}
-				/*¸üĞÂÆåÅÌ*/
+				/*æ›´æ–°æ£‹ç›˜*/
 				if (pt<INF) 
 				{
 					int tl = t + veSet[vesArray[i]].serveTime, bl = b + veSet[vesArray[i]].length;
@@ -96,11 +96,11 @@ int calCost(const string & vesArray, Vessel* veSet, const int & numOfVes, const 
 						for (int pb = b; pb < bl; pb++) // [b,b+l]
 							availableArea[pb][pt] = 1;
  
-					veSet[vesArray[i]].place(t, b);/*¸üĞÂ´¬µÄÊôĞÔ*/
-					placeNum++;						/*ÒÑ¾­Í£´¬ÊıÁ¿*/
-					totalwaitingtime += veSet[vesArray[i]].waitingTime;/*¸üĞÂµÈ´ıÊ±¼ä*/
-					LastDeparture = LastDeparture < tl ? tl : LastDeparture;/*¸üĞÂ×îºóÀë¿ª*/
-					t = INF;/*Ìø³öÑ­»·*/
+					veSet[vesArray[i]].place(t, b);/*æ›´æ–°èˆ¹çš„å±æ€§*/
+					placeNum++;						/*å·²ç»åœèˆ¹æ•°é‡*/
+					totalwaitingtime += veSet[vesArray[i]].waitingTime;/*æ›´æ–°ç­‰å¾…æ—¶é—´*/
+					LastDeparture = LastDeparture < tl ? tl : LastDeparture;/*æ›´æ–°æœ€åç¦»å¼€*/
+					t = INF;/*è·³å‡ºå¾ªç¯*/
 					break;
 				}
 			}
@@ -110,7 +110,7 @@ int calCost(const string & vesArray, Vessel* veSet, const int & numOfVes, const 
 	cost = W1 *(numOfVes - placeNum) + W2*totalwaitingtime + W3*LastDeparture;
 	if (printopt)
 	{
-		/*´òÓ¡½â*/
+		/*æ‰“å°è§£*/
 		for (int i = 0; i < numOfVes; i++) printf("%d,%d;", veSet[i].b, veSet[i].t);
 		printf("\nunassigned vessels: %d\ntotal Waiting Time: %d\nLast Departure Time: %d\n", (numOfVes - placeNum), totalwaitingtime, LastDeparture);
 	}
