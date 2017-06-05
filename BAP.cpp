@@ -33,24 +33,24 @@ int main()
 	{
 
 		
-		for (int i = 0; i < n; i++)/*Êı¾İÊäÈë*/
+		for (int i = 0; i < n; i++)/*æ•°æ®è¾“å…¥*/
 		{
 			cin >> veSet[i].arrivalTime >> veSet[i].serveTime >> veSet[i].length ;
 		}
 		
  
-		//sort(vearray,vearray+n,cmpGreedy); /*°´ÕÕÊ±¼äÅÅ¸öĞò*/
+		//sort(vearray,vearray+n,cmpGreedy); /*æŒ‰ç…§æ—¶é—´æ’ä¸ªåº*/
 		
 		
-		string vearray = string(n, 0);/*·ÅÖÃĞòÁĞ*/
+		string vearray = string(n, 0);/*æ”¾ç½®åºåˆ—*/
 		
 		for (int i = 0; i < n; i++) vearray[i] = i;
-		//violence(veSet, vearray, n, t, b);/*±©Á¦ËÑË÷*/
+		//violence(veSet, vearray, n, t, b);/*æš´åŠ›æœç´¢*/
 		double r1 = clock();
 
 		while (1)
 		{
-			// /*¸ø¸öid*/
+			// /*ç»™ä¸ªid*/
 			
 			sa(veSet, vearray, n, t, b, 50, 0.0001, 0.999);
 			int cost = calCost(vearray, veSet, n, t, b, 1);
